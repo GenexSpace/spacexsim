@@ -5,34 +5,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>SPACEX - ISS Docking Simulator</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Language" content="en">
-	<meta name="SpaceX">
-	<meta name="keywords" content="space,spacex,aerospace,elon musk,mars,falcon 9,falcon heavy,dragon,nasa,simulator">
-	<meta name="description" content="This simulator will familiarize you with the controls of the actual interface used by NASA Astronauts to manually pilot the SpaceX Dragon 2 vehicle to the International Space Station." />
-
-	<meta property="og:locale" content="en_US">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="SPACEX - ISS Docking Simulator">
-	<meta property="og:site_name" content="SPACEX - ISS Docking Simulator">
-	<meta property="og:description" content="This simulator will familiarize you with the controls of the actual interface used by NASA Astronauts to manually pilot the SpaceX Dragon 2 vehicle to the International Space Station.">
-	<meta property="og:image" content="img/share.jpg">
-	<meta itemprop="name" content="SPACEX - ISS Docking Simulator">
-	<meta itemprop="image" content="img/share.jpg">
-	<meta property="og:url" content="index.html">
-
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@spacex">
-	<meta name="twitter:description" content="This simulator will familiarize you with the controls of the actual interface used by NASA Astronauts to manually pilot the SpaceX Dragon 2 vehicle to the International Space Station.">
-	<meta name="twitter:title" content="SPACEX - ISS Docking Simulator">
-	<meta name="twitter:image" content="img/share.jpg">
-
-	<link rel="icon" type="image/x-icon" href="img/favicon.ico">
-	<link rel="Shortcut Icon" type="image/ico" href="img/favicon.ico">
-	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" href="css/normalize.min.css" media="screen">
@@ -609,7 +581,7 @@
 			</g>
 		</svg>
 		<div id="intro-step1">
-			<p class="animate">This simulator will familiarize you with the controls of the <a href="https://www.youtube.com/watch?v=MdJDBHzJF8E" target="_blank">actual interface</a> used by NASA Astronauts to manually pilot the SpaceX Dragon 2 vehicle to the International Space Station. Successful docking is achieved when all green numbers in the center of the interface are below <span class="green">0.2</span>. Movement in space is <strong>slow</strong> and requires patience &amp; precision.</p>
+			<p class="animate">This simulator will familiarize you with the controls of the actual interface used by NASA Astronauts to manually pilot the SpaceX Dragon 2 vehicle to the International Space Station. Successful docking is achieved when all green numbers in the center of the interface are below <span class="green">0.2</span>. Movement in space is <strong>slow</strong> and requires patience &amp; precision.</p>
 			<div id="begin-button" class="message-button animate">BEGIN</div>
 			<div id="instructions-button" class="text-button animate">INSTRUCTIONS</div>
 		</div>
@@ -745,7 +717,38 @@
 			#endif
 		}
 	</script>
+<script>
+// Create a div to display the countdown
+const timerDisplay = document.createElement('div');
+timerDisplay.id = 'timer-display';
+timerDisplay.style.position = 'fixed';
+timerDisplay.style.top = '60px';
+timerDisplay.style.left = '10px';
+timerDisplay.style.fontSize = '24px';
+timerDisplay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+timerDisplay.style.color = 'white';
+timerDisplay.style.padding = '10px';
+timerDisplay.style.borderRadius = '5px';
+document.body.appendChild(timerDisplay);
 
+// Start the timer on button click
+document.getElementById("begin-button").addEventListener("click", function() {
+    let totalTime = 5 * 60;  // 5 minutes in seconds
+    let displayTimer = setInterval(function() {
+        let minutes = Math.floor(totalTime / 60);
+        let seconds = totalTime % 60;
+        document.title = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;  // Display in the tab title
+        timerDisplay.innerText = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;  // Display on the page
+
+        if (totalTime <= 0) {
+            clearInterval(displayTimer);
+            alert("5 minutes have passed. Time's up!");
+            window.location.reload();
+        }
+        totalTime--;
+    }, 1000);  // Update every second
+});
+</script>
 	<script type="text/javascript" src="js/threed.min.js"></script>
 </body>
 
